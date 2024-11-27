@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework', 
+    'attraction',
+    'compilation', 
+    'users',
+    'django_filters',         
 ]
 
 MIDDLEWARE = [
@@ -79,7 +85,22 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.getenv('POSTGRES_DB', 'mydatabase'),
+#         'USER': os.getenv('POSTGRES_USER', 'myuser'),
+#         'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'mypassword'),
+#         'HOST': os.getenv('POSTGRES_HOST', 'db'),
+#         'PORT': os.getenv('POSTGRES_PORT', '5432'),
+#         'OPTIONS': {
+#             'client_encoding': 'UTF8',
+#         },
+#     }
+# }
 
+
+AUTH_USER_MODEL = 'users.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
