@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import Home from './component/Home';
 
+// il faut merge comme ca
 function App() {
   return (
   <Router>
