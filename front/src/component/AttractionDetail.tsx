@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import AttractionCard from './AttractionCard.tsx';
 import { Typography, Box, Chip } from '@mui/material';
 
@@ -29,91 +30,83 @@ interface AttractionDetailProps {
   similarSuggestions: string[];
 }
 
-const AttractionDetail: React.FC<AttractionDetailProps> = ({
-  location_id,
-  name,
-  description,
-  category,
-  street1,
-  street2,
-  city,
-  state,
-  country,
-  postalcode,
-  address_string,
-  price_level,
-  num_reviews,
-  rating,
-  image_url,
-  contactInfo,
-  geoInfo,
-  openingHours,
-  cuisineType,
-  hotelStyle,
-  groups,
-  tripAdvisorRating,
-  awards,
-  similarSuggestions
-}) => {
+const AttractionDetail: React.FC = () => {
+  const { location_id } = useParams<{ location_id: string }>();
+  const [attraction, setAttraction] = useState<AttractionDetailProps | null>(null);
+
+  useEffect(() => {
+    fetch(`/api/attractions/${location_id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Fetched attraction:', data);
+        setAttraction(data);
+      })
+      .catch((error) => console.error('Error fetching attraction:', error));
+  }, [location_id]);
+
+  if (!attraction) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Box>
       <AttractionCard
-        location_id={location_id}
-        name={name}
-        description={description}
-        category={category}
-        street1={street1}
-        street2={street2}
-        city={city}
-        state={state}
-        country={country}
-        postalcode={postalcode}
-        address_string={address_string}
-        price_level={price_level}
-        num_reviews={num_reviews}
-        rating={rating}
-        image_url={image_url}
-        contactInfo={contactInfo}
-        geoInfo={geoInfo}
-        openingHours={openingHours}
-        cuisineType={cuisineType}
-        hotelStyle={hotelStyle}
-        groups={groups}
-        tripAdvisorRating={tripAdvisorRating}
-        awards={awards}
-        similarSuggestions={similarSuggestions}
+        location_id={attraction.location_id}
+        name={attraction.name}
+        description={attraction.description}
+        category={attraction.category}
+        street1={attraction.street1}
+        street2={attraction.street2}
+        city={attraction.city}
+        state={attraction.state}
+        country={attraction.country}
+        postalcode={attraction.postalcode}
+        address_string={attraction.address_string}
+        price_level={attraction.price_level}
+        num_reviews={attraction.num_reviews}
+        rating={attraction.rating}
+        image_url={attraction.image_url}
+        contactInfo={attraction.contactInfo}
+        geoInfo={attraction.geoInfo}
+        openingHours={attraction.openingHours}
+        cuisineType={attraction.cuisineType}
+        hotelStyle={attraction.hotelStyle}
+        groups={attraction.groups}
+        tripAdvisorRating={attraction.tripAdvisorRating}
+        awards={attraction.awards}
+        similarSuggestions={attraction.similarSuggestions}
       />
       <Typography variant="h6" gutterBottom>
         Additional Details:
       </Typography>
       <Typography variant="body2" gutterBottom>
-        Contact Info: {contactInfo}
+        Contact Info: {attraction.contactInfo}
       </Typography>
       <Typography variant="body2" gutterBottom>
-        Geo Info: {geoInfo}
+        Geo Info: {attraction.geoInfo}
       </Typography>
       <Typography variant="body2" gutterBottom>
-        Opening Hours: {openingHours}
+        Opening Hours: {attraction.openingHours}
       </Typography>
-      {cuisineType && <Typography variant="body2" gutterBottom>Cuisine Type: {cuisineType}</Typography>}
-      {hotelStyle && <Typography variant="body2" gutterBottom>Hotel Style: {hotelStyle}</Typography>}
-      {groups && (
+      {attraction.cuisineType && <Typography variant="body2" gutterBottom>Cuisine Type: {attraction.cuisineType}</Typography>}
+      {attraction.hotelStyle && <Typography variant="body2" gutterBottom>Hotel Style: {attraction.hotelStyle}</Typography>}
+      {attraction.groups && (
         <Box display="flex" flexWrap="wrap" marginTop="1rem">
-          {groups.map((group, index) => (
+          {attraction.groups.map((group, index) => (
             <Chip key={index} label={group} style={{ margin: '0.2rem' }} />
           ))}
         </Box>
       )}
       <Typography variant="body2" gutterBottom>
-        TripAdvisor Rating: {tripAdvisorRating}/10
+        TripAdvisor Rating: {attraction.tripAdvisorRating}/10
       </Typography>
       <Box display="flex" flexWrap="wrap" marginTop="1rem">
-        {awards.map((award, index) => (
+        {attraction.awards.map((award, index) => (
           <Chip key={index} label={award} style={{ margin: '0.2rem' }} />
         ))}
       </Box>
       <Typography variant="body2" gutterBottom>
-        Similar Suggestions: {similarSuggestions.join(', ')}
+        Similar Suggestions: {attraction.similarSuggestions.join(', ')}
       </Typography>
     </Box>
   );
