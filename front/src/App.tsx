@@ -11,12 +11,14 @@ import SearchPage from './component/SearchPage.tsx';
 import AttractionCard from './component/AttractionCard.tsx';
 import Home from './component/Home.tsx';
 import LandingPage from './component/LandingPage.tsx';
+import DashboardPage from './component/DashboardPage.tsx';
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
         <Route
           path="/attraction/test"
           element={

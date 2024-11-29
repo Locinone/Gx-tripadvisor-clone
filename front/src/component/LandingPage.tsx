@@ -1,37 +1,39 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
 
 const LandingPage = () => {
-    const [usertype,setUsertype] = useState({});
+    const [usertype, setUsertype] = useState({});
+    const [inputText, setInputText] = useState("");
 
     const handleUsertype = (type: string) => {
         console.log(type);
         setUsertype(type);
     }
-    
-    const fetchAttractions = async () => {
-        
-    }
+
+    const handleInputSubmit = () => {
+        console.log("User input:", inputText);
+        // Add logic to handle the submitted input (e.g., API call)
+    };
 
     const services = [
         {
             title: "Professional Attractions",
             image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/df/75/f4/caption.jpg?w=800&h=-1&s=1",
-            link: "#",
+            link: "/dashboard",
             type: "professional"
         },
         {
             title: "Tourism Attractions",
             image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/df/77/93/caption.jpg?w=800&h=-1&s=1",
-            link: "#",
+            link: "/dashboard",
             type: "tourism"
         },
         {
             title: "Local Attractions",
             image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/df/76/76/caption.jpg?w=800&h=-1&s=1",
-            link: "#",
+            link: "/dashboard",
             type: "local"
         },
     ];
@@ -77,7 +79,7 @@ const LandingPage = () => {
                                 boxShadow: "0 10px 20px rgba(0, 0, 0, 0.3)",
                             },
                         }}
-                        onClick={() => 
+                        onClick={() =>
                             handleUsertype(service.type)
                         }
                     >
@@ -99,6 +101,32 @@ const LandingPage = () => {
                         </Box>
                     </Box>
                 ))}
+            </Box>
+            {/* Footer Input Box */}
+            <Box
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
+                bgcolor="#ffff"
+                padding="2rem"
+                marginTop="2rem"
+            >
+                <Typography variant="h6" fontWeight="bold" marginBottom="1rem">
+                    Enter your town bellow
+                </Typography>
+                <Box display="flex" flexDirection="row" gap="1rem" alignItems="center">
+                    <TextField
+                        variant="outlined"
+                        placeholder="Type something..."
+                        value={inputText}
+                        onChange={(e) => setInputText(e.target.value)}
+                        sx={{ width: "300px" }}
+                    />
+                    <Button variant="contained" color="primary" onClick={handleInputSubmit}>
+                        Submit
+                    </Button>
+                </Box>
             </Box>
         </>
     );
