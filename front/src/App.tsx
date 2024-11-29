@@ -19,37 +19,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<DashboardPage />} />
-        <Route
-          path="/attraction/test"
-          element={
-            <AttractionCard
-              location_id="187147"
-              name="Eiffel Tower"
-              description="The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris, France."
-              category="Landmark"
-              street1="Champ de Mars"
-              street2="5 Avenue Anatole France"
-              city="Paris"
-              state="Île-de-France"
-              country="France"
-              postalcode="75007"
-              address_string="Champ de Mars, 5 Avenue Anatole France, 75007 Paris, Île-de-France, France"
-              price_level={3}
-              num_reviews={12345}
-              rating={4.8}
-              image_url="https://cultureua.com/wp-content/uploads/2020/03/5e6a00e22083f.png"
-              contactInfo="Contact Info"
-              geoInfo="Geo Info"
-              openingHours="9 AM to 11 PM"
-              cuisineType="French"
-              hotelStyle="Luxury"
-              groups={["Tourist Attraction", "Historical Site"]}
-              tripAdvisorRating={4.8}
-              awards={["Best Landmark", "Top Attraction"]}
-              similarSuggestions={["Louvre Museum", "Notre-Dame Cathedral"]}
-            />
-          }
-        />
         <Route path="/landing" element={<LandingPage/>} />
         <Route path="/attractions" element={<AttractionList />} />
         <Route path="/attraction/:location_id" element={<AttractionDetail />} />
