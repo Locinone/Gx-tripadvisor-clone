@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'attraction',
     'compilation', 
     'users',
+    'session',
     'django_filters',         
 ]
 
