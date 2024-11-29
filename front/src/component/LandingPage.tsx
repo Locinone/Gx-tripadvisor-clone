@@ -10,30 +10,62 @@ const LandingPage = () => {
     const handleUsertype = (type: string) => {
         console.log(type);
         setUsertype(type);
+        const now = new Date();
+        const expirationTime = new Date(now.getTime() + 24 * 60 * 60 * 1000); // 1 day from now
+
+        const userData = {
+            time: now.toISOString(),
+            expiration_time: expirationTime.toISOString(),
+            user_profile: type,
+        };
+
+        localStorage.setItem("userData", JSON.stringify(userData));
+        axios.post("http://localhost:8000/db/add/", {
+            data: userData,
+        }, {
+            headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            console.log("Data saved successfully:", response.data);
+        })
+        .catch(error => {
+            console.error("Error saving data:", error);
+        });
     }
 
     const handleInputSubmit = () => {
         console.log("User input:", inputText);
         // Add logic to handle the submitted input (e.g., API call)
+        axios.get(`http://localhost:8000/api/get_tripadvisor/?name=${inputText}`)
+            .then(response => {
+                console.log("Data retrieved successfully:", response.data);
+                // Add logic to handle the retrieved data
+            })
+            .catch(error => {
+                console.error("Error retrieving data:", error);
+            });
     };
 
     const services = [
         {
             title: "Professional Attractions",
             image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/df/75/f4/caption.jpg?w=800&h=-1&s=1",
-            link: "/dashboard",
+            // link: "/#",
             type: "professional"
         },
         {
             title: "Tourism Attractions",
             image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/df/77/93/caption.jpg?w=800&h=-1&s=1",
-            link: "/dashboard",
+            // link: "/#",
             type: "tourism"
         },
         {
             title: "Local Attractions",
             image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/df/76/76/caption.jpg?w=800&h=-1&s=1",
-            link: "/dashboard",
+            // link: "/#",
             type: "local"
         },
     ];
