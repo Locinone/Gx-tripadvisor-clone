@@ -24,7 +24,6 @@ const AttractionCard: React.FC<Attraction> = ({
   hotelStyle,
   groups,
   tripAdvisorRating,
-  awards,
   similarSuggestions
 }) => {
   return (
@@ -85,11 +84,6 @@ const AttractionCard: React.FC<Attraction> = ({
         <Typography variant="body2" gutterBottom>
           TripAdvisor Rating: {tripAdvisorRating}/10
         </Typography>
-        <Box display="flex" flexWrap="wrap" marginTop="1rem">
-          {awards.map((award, index) => (
-            <Chip key={index} label={`Award : ${award.name} ${award.year}`} style={{ margin: '0.2rem' }} />
-          ))}
-        </Box>
       </CardContent>
     </Card>
   );
