@@ -1,6 +1,9 @@
 import React from 'react';
 import { Card, CardMedia, CardContent, Typography, Box, Chip } from '@mui/material';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Attraction } from '../interfaces/Attraction';
+
 const AttractionCard: React.FC<Attraction> = ({
   picture,
   location_id,
@@ -27,8 +30,76 @@ const AttractionCard: React.FC<Attraction> = ({
   tripAdvisorRating,
   similarSuggestions
 }) => {
+
+  const [compilation, setCompilation] = React.useState<Attraction[]>([]);
+  const [isFavorite, setIsFavorite] = React.useState(false);
+
+  const handleAddCompilation = (attraction: Attraction) => {
+    setCompilation([...compilation, attraction]);
+    console.log(compilation);
+    localStorage.setItem('compilation', JSON.stringify(compilation));
+    setIsFavorite(!isFavorite);
+  }
+
   return (
-    <Card style={{ maxWidth: 345, margin: '1rem', padding: '0.5rem', borderRadius: '15px' }}>
+    <Card style={{ maxWidth: 345, margin: '1rem', padding: '0.5rem', borderRadius: '15px' }} >
+      <Box display="flex" justifyContent="flex-end">
+        {isFavorite ? (
+          <FavoriteIcon style={{ cursor: 'pointer', color: 'red' }} onClick={() => handleAddCompilation({ 
+            picture,
+            location_id,
+            name,
+            description,
+            category,
+            street1,
+            street2,
+            city,
+            state,
+            country,
+            postalcode,
+            address_string,
+            price_level,
+            num_reviews,
+            rating,
+            image_url,
+            contactInfo,
+            geoInfo,
+            openingHours,
+            cuisineType,
+            hotelStyle,
+            groups,
+            tripAdvisorRating,
+            similarSuggestions
+          })} />
+        ) : (
+          <FavoriteBorderIcon style={{ cursor: 'pointer' }} onClick={() => handleAddCompilation({ 
+            picture,
+            location_id,
+            name,
+            description,
+            category,
+            street1,
+            street2,
+            city,
+            state,
+            country,
+            postalcode,
+            address_string,
+            price_level,
+            num_reviews,
+            rating,
+            image_url,
+            contactInfo,
+            geoInfo,
+            openingHours,
+            cuisineType,
+            hotelStyle,
+            groups,
+            tripAdvisorRating,
+            similarSuggestions
+          })} />
+        )}
+      </Box>
       <CardMedia
         component="img"
         height="140"
