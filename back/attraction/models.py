@@ -22,6 +22,7 @@ class Attraction(models.Model):
     price_level = models.IntegerField(null=True, blank=True)
     hours = models.JSONField(blank=True, null=True)
     awards = models.JSONField(blank=True, null=True)
+    trip_type = models.JSONField(blank=True, null=True)
 
     def __str__(self):
         return self.name

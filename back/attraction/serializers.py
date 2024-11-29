@@ -9,5 +9,5 @@ class AttractionSerializer(serializers.ModelSerializer):
             'street1', 'street2', 'city', 'state', 'country', 
             'postalcode', 'address_string', 'latitude', 'longitude', 
             'phone', 'website', 'rating', 'num_reviews', 'photo_count', 
-            'price_level', 'hours', 'awards'
+            'price_level', 'hours', 'awards', 'trip_type'
         ]
