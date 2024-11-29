@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState} from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
-import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
-    const [usertype, setUsertype] = useState({});
+    const [usertype, setUsertype] = useState<string | null>(null);
     const [inputText, setInputText] = useState("");
+
+    const navigate = useNavigate();
 
     const handleUsertype = (type: string) => {
         console.log(type);
@@ -47,6 +49,7 @@ const LandingPage = () => {
             .catch(error => {
                 console.error("Error retrieving data:", error);
             });
+        navigate("/attractions");
     };
 
     const services = [
@@ -106,14 +109,13 @@ const LandingPage = () => {
                             backgroundPosition: "center",
                             textDecoration: "none",
                             transition: "transform 0.3s, box-shadow 0.3s",
+                            filter: usertype && usertype !== service.type ? "grayscale(100%)" : "none",
                             "&:hover": {
                                 transform: "scale(1.05)",
                                 boxShadow: "0 10px 20px rgba(0, 0, 0, 0.3)",
                             },
                         }}
-                        onClick={() =>
-                            handleUsertype(service.type)
-                        }
+                        onClick={() => handleUsertype(service.type)}
                     >
                         {/* Overlay and Text */}
                         <Box
@@ -145,7 +147,7 @@ const LandingPage = () => {
                 marginTop="2rem"
             >
                 <Typography variant="h6" fontWeight="bold" marginBottom="1rem">
-                    Enter your town bellow
+                    Enter your town below
                 </Typography>
                 <Box display="flex" flexDirection="row" gap="1rem" alignItems="center">
                     <TextField

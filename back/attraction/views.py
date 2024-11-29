@@ -55,6 +55,7 @@ def fetch_and_store_attractions(request):
                     'num_reviews': sum(int(detail_data['review_rating_count'][str(i)]) for i in range(1, 6)) if 'review_rating_count' in detail_data else 0,
                     'photo_count': int(detail_data.get('photo_count', 0)),
                     'trip_type': detail_data.get('trip_types', {"name": "solo", "localized_name": "Solo travel", "value": "511"}),
+                    'trip_type': max(detail_data.get('trip_types', []), key=lambda x: x['value'], default={"name": "solo", "localized_name": "Solo travel", "value": "511"}),
                     'street1': attraction_data['address_obj'].get('street1', 'N/A'),
                     'street2': attraction_data['address_obj'].get('street2', 'N/A'),
                     'city': attraction_data['address_obj'].get('city', 'N/A'),
