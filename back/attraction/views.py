@@ -30,6 +30,8 @@ def get_attractions(request):
         paginator.page_size = resPerPage
         queryset = paginator.paginate_queryset(filterset.qs, request)
         serializer = AttractionSerializer(queryset, many=True)
+        # envoyer en console les données attractions
+        print(serializer.data)
         return Response({"attractions": serializer.data})
     elif request.method == 'POST':
         profile_type = request.data.get('profile_type')

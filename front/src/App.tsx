@@ -8,6 +8,7 @@ import {
 import AttractionList from './component/AttractionList.tsx';
 import AttractionDetail from './component/AttractionDetail.tsx';
 import SearchPage from './component/SearchPage.tsx';
+import NavBar from './component/NavBar.tsx';
 import AttractionCard from './component/AttractionCard.tsx';
 import Home from './component/Home.tsx';
 import LandingPage from './component/LandingPage.tsx';
@@ -16,6 +17,7 @@ import DashboardPage from './component/DashboardPage.tsx';
 function App() {
   return (
     <Router>
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<DashboardPage />} />

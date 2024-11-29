@@ -1,34 +1,7 @@
 import React from 'react';
 import { Card, CardMedia, CardContent, Typography, Box, Chip } from '@mui/material';
-
-interface AttractionCardProps {
-  location_id: string;
-  name: string;
-  description: string;
-  category: string;
-  street1: string;
-  street2: string;
-  city: string;
-  state: string;
-  country: string;
-  postalcode: string;
-  address_string: string;
-  price_level: number | null;
-  num_reviews: number | null;
-  rating: number | null;
-  image_url: string;
-  contactInfo: string;
-  geoInfo: string;
-  openingHours: string;
-  cuisineType?: string;
-  hotelStyle?: string;
-  groups?: string[];
-  tripAdvisorRating: number;
-  awards: string[];
-  similarSuggestions: string[];
-}
-
-const AttractionCard: React.FC<AttractionCardProps> = ({
+import { Attraction } from '../interfaces/Attraction';
+const AttractionCard: React.FC<Attraction> = ({
   location_id,
   name,
   description,
@@ -114,12 +87,9 @@ const AttractionCard: React.FC<AttractionCardProps> = ({
         </Typography>
         <Box display="flex" flexWrap="wrap" marginTop="1rem">
           {awards.map((award, index) => (
-            <Chip key={index} label={award} style={{ margin: '0.2rem' }} />
+            <Chip key={index} label={`Award : ${award.name} ${award.year}`} style={{ margin: '0.2rem' }} />
           ))}
         </Box>
-        <Typography variant="body2" gutterBottom>
-          Similar Suggestions: {similarSuggestions.join(', ')}
-        </Typography>
       </CardContent>
     </Card>
   );
