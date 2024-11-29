@@ -9,10 +9,12 @@ import {
 import AttractionList from './component/AttractionList.tsx';
 import AttractionDetail from './component/AttractionDetail.tsx';
 import SearchPage from './component/SearchPage.tsx';
+import NavBar from './component/NavBar.tsx';
 
 function App() {
   return (
     <Router>
+      <NavBar />
       <Routes>
        {/* <Route path="/" element={<Home />} />*/}
         <Route path="/attractions" element={<AttractionList />} />
