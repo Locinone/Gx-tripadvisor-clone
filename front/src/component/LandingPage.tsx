@@ -20,20 +20,20 @@ const LandingPage = () => {
         };
 
         localStorage.setItem("userData", JSON.stringify(userData));
-        axios.post("http://localhost:8000/db/add/", {
-            data: userData,
-        }, {
-            headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json'
-            }
-        })
-        .then(response => {
-            console.log("Data saved successfully:", response.data);
-        })
-        .catch(error => {
-            console.error("Error saving data:", error);
-        });
+        // axios.post("http://localhost:8000/db/add/", {
+        //     data: userData,
+        // }, {
+        //     headers: {
+        //     'Access-Control-Allow-Origin': '*',
+        //     'Content-Type': 'application/json'
+        //     }
+        // })
+        // .then(response => {
+        //     console.log("Data saved successfully:", response.data);
+        // })
+        // .catch(error => {
+        //     console.error("Error saving data:", error);
+        // });
     }
 
     const handleInputSubmit = () => {
