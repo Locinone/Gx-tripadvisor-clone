@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardMedia, CardContent, Typography, Box, Chip } from '@mui/material';
 import { Attraction } from '../interfaces/Attraction';
 const AttractionCard: React.FC<Attraction> = ({
+  picture,
   location_id,
   name,
   description,
@@ -31,7 +32,7 @@ const AttractionCard: React.FC<Attraction> = ({
       <CardMedia
         component="img"
         height="140"
-        image={image_url}
+        image={picture}
         alt={name}
         style={{ borderRadius: '10px' }}
       />

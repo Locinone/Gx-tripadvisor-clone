@@ -10,4 +10,5 @@ urlpatterns = [
     path('get_tripadvisor/', fetch_and_store_attractions, name='fetch_and_store_attractions'),
     path('get_attractions/', get_attractions, name='get_attractions'),
     path('get_attraction/<int:pk>/', get_attraction, name='get_attraction'),
+    path('fetch_and_store_attractions/', fetch_and_store_attractions, name='fetch_and_store_attractions'),
 ]

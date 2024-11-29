@@ -1,6 +1,7 @@
 from django.db import models
 
 class Attraction(models.Model):
+    picture = models.URLField(blank=True)
     location_id = models.CharField(max_length=255, unique=True, default='default_location_id')
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)

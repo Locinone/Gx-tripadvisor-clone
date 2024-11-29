@@ -4,6 +4,7 @@ import AttractionCard from './AttractionCard.tsx';
 import { Typography, Box, Chip } from '@mui/material';
 
 interface AttractionDetailProps {
+  picture: string;
   location_id: string;
   name: string;
   description: string;
@@ -51,6 +52,7 @@ const AttractionDetail: React.FC = () => {
   return (
     <Box>
       <AttractionCard
+        picture={attraction.picture}
         location_id={attraction.location_id}
         name={attraction.name}
         description={attraction.description}

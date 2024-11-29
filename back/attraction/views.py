@@ -40,9 +40,12 @@ def fetch_and_store_attractions(request):
                 continue
             # print(attraction_data)
             detail_response = requests.get(f"https://api.content.tripadvisor.com/api/v1/location/{attraction_data['location_id']}/details?language=en&currency=USD&key={api_key}")
-            if detail_response.status_code == 200:
+            photo_response = requests.get(f"https://api.content.tripadvisor.com/api/v1/location/{attraction_data['location_id']}/photos?language=en&currency=USD&key={api_key}")
+            if (detail_response.status_code == 200) and (photo_response.status_code == 200):
                 detail_data = detail_response.json()
+                photo_data = photo_response.json()
                 fields_to_update = {
+                    'picture': photo_data['data'][0]['images']['large']['url'] if photo_data['data'] else 'https://cdn.pixabay.com/photo/2021/06/22/16/39/arch-6356637_1280.jpg',
                     'category': detail_data['subcategory'][0]['name'] if detail_data['subcategory'] else 'N/A',
                     'latitude': detail_data.get('latitude', 'N/A'),
                     'longitude': detail_data.get('longitude', 'N/A'),
