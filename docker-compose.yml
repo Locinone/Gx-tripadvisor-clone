@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - DJANGO_SETTINGS_MODULE=attraction.settings
+      - TRIPADVISOR_API_KEY=151394C68890426FB601855CF8E184E4
+    volumes:
+      - ./back:/app
